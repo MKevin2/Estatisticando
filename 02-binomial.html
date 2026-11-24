@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <title>Distribuição binomial · Blog Estatístico</title>
+  <meta name="description" content="Identificação do modelo binomial, probabilidades pontuais e acumuladas, regra do complementar, inversão de sucesso e fracasso e combinações.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">Blog <span>Estatístico</span></a>
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="01-variaveis-aleatorias.html">1 · Variáveis</a>
+      <a href="02-binomial.html" aria-current="page">2 · Binomial</a>
+      <a href="03-poisson.html">3 · Poisson</a>
+      <a href="04-aproximacao-poisson.html">4 · Aproximação</a>
+      <a href="05-normal.html">5 · Normal</a>
+      <a href="mapa-mental.html">Mapa mental</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <span class="kicker">Tópico 2</span>
+    <h1>Distribuição binomial</h1>
+    <p class="lead">O modelo binomial descreve o número de sucessos em uma sequência fixa de tentativas independentes com a mesma probabilidade de sucesso.</p>
+
+    <h2>Identificação do modelo</h2>
+    <p>Um experimento segue a distribuição binomial quando três condições são satisfeitas:</p>
+    <ol class="regras">
+      <li>O número de tentativas <i>n</i> é fixo.</li>
+      <li>Cada tentativa tem apenas dois resultados possíveis, geralmente chamados de sucesso e fracasso.</li>
+      <li>A probabilidade de sucesso <i>p</i> é constante em todas as tentativas.</li>
+    </ol>
+    <p>Indica-se <i>X</i> ∼ B(<i>n</i>, <i>p</i>), em que <i>X</i> é o número de sucessos. Os valores possíveis são <i>k</i> = 0, 1, 2, …, <i>n</i>.</p>
+
+    <h2>Probabilidade pontual</h2>
+    <p>A probabilidade de obter exatamente <i>k</i> sucessos combina três fatores: a quantidade de maneiras de escolher as <i>k</i> posições de sucesso, a probabilidade de os <i>k</i> sucessos ocorrerem e a probabilidade de os <i>n</i> − <i>k</i> fracassos ocorrerem.</p>
+
+    <div class="formula">
+      <span class="rotulo">Função de probabilidade binomial</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> = <i>k</i>) =
+        (<span class="fr sem"><span><i>n</i></span><span><i>k</i></span></span>)
+        <i>p</i><sup><i>k</i></sup>
+        (1 − <i>p</i>)<sup><i>n</i> − <i>k</i></sup>
+      </p>
+    </div>
+
+    <p>O número de combinações é o coeficiente binomial, definido por:</p>
+
+    <div class="formula">
+      <span class="rotulo">Coeficiente binomial</span>
+      <p class="eq">
+        (<span class="fr sem"><span><i>n</i></span><span><i>k</i></span></span>)
+        =
+        <span class="fr"><span><i>n</i>!</span><span><i>k</i>! (<i>n</i> − <i>k</i>)!</span></span>
+      </p>
+    </div>
+
+    <h2>Média, variância e desvio-padrão</h2>
+    <div class="formula">
+      <span class="rotulo">Medidas de resumo</span>
+      <p class="eq">
+        <i>E</i>(<i>X</i>) = <i>np</i> &nbsp;&nbsp; VAR(<i>X</i>) = <i>np</i>(1 − <i>p</i>) &nbsp;&nbsp; DP(<i>X</i>) = <span class="raiz">√<span class="rad"><i>np</i>(1 − <i>p</i>)</span></span>
+      </p>
+    </div>
+
+    <h2>Probabilidades acumuladas</h2>
+    <p>Perguntas do tipo “no máximo <i>k</i> sucessos” ou “no mínimo <i>k</i> sucessos” exigem somar várias probabilidades pontuais. A probabilidade de no máximo <i>k</i> sucessos é a soma das probabilidades de 0 até <i>k</i>.</p>
+
+    <div class="formula">
+      <span class="rotulo">No máximo k sucessos</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> ≤ <i>k</i>) =
+        <span class="sum"><span class="up"><i>k</i></span><span class="big">∑</span><span class="low"><i>j</i> = 0</span></span>
+        <i>P</i>(<i>X</i> = <i>j</i>)
+      </p>
+    </div>
+
+    <p>Já “no mínimo <i>k</i> sucessos” corresponde à soma de <i>k</i> até <i>n</i>.</p>
+
+    <div class="formula">
+      <span class="rotulo">No mínimo k sucessos</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> ≥ <i>k</i>) =
+        <span class="sum"><span class="up"><i>n</i></span><span class="big">∑</span><span class="low"><i>j</i> = <i>k</i></span></span>
+        <i>P</i>(<i>X</i> = <i>j</i>)
+      </p>
+    </div>
+
+    <h2>Regra do complementar</h2>
+    <p>Como a soma de todas as probabilidades é igual a 1, quando a soma direta é longa, é mais simples calcular o evento contrário e subtrair de 1. Para “no mínimo <i>k</i> sucessos”, o contrário é “menos de <i>k</i> sucessos”.</p>
+
+    <div class="formula">
+      <span class="rotulo">Regra do complementar</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> ≥ <i>k</i>) = 1 − <i>P</i>(<i>X</i> &lt; <i>k</i>) = 1 − <i>P</i>(<i>X</i> ≤ <i>k</i> − 1)
+      </p>
+    </div>
+
+    <div class="nota">
+      <strong>Atenção ao “menor que” e ao “menor ou igual”.</strong>
+      <p>Como <i>X</i> assume apenas valores inteiros, <i>P</i>(<i>X</i> &lt; <i>k</i>) é igual a <i>P</i>(<i>X</i> ≤ <i>k</i> − 1). Trocar um pelo outro é um dos erros mais frequentes nesse tópico.</p>
+    </div>
+
+    <h2>Inversão entre sucesso e fracasso</h2>
+    <p>Se a pergunta trata como sucesso o evento que, na definição do modelo, foi chamado de fracasso, é possível trocar os papéis. Define-se a nova variável <i>Y</i> como o número de fracassos, que segue B(<i>n</i>, 1 − <i>p</i>). Como o número de sucessos e de fracassos somam <i>n</i>, vale:</p>
+
+    <div class="formula">
+      <span class="rotulo">Inversão de sucesso e fracasso</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> = <i>k</i>) = <i>P</i>(<i>Y</i> = <i>n</i> − <i>k</i>), &nbsp;&nbsp; com <i>Y</i> ∼ B(<i>n</i>, 1 − <i>p</i>)
+      </p>
+    </div>
+
+    <h2>Uso da tecla nCr na calculadora</h2>
+    <p>O coeficiente binomial pode ser obtido diretamente na calculadora científica, sem fatoriais manuais. A tecla aparece com a sigla nCr ou com um símbolo equivalente, geralmente na segunda função de outra tecla. A sequência geral é:</p>
+    <ol class="regras">
+      <li>Digite o valor de <i>n</i>.</li>
+      <li>Pressione a tecla nCr (ou a sua segunda função).</li>
+      <li>Digite o valor de <i>k</i> e pressione o sinal de igual.</li>
+    </ol>
+    <p>O resultado é o número de combinações, que multiplica <i>p</i><sup><i>k</i></sup>(1 − <i>p</i>)<sup><i>n</i> − <i>k</i></sup> para formar a probabilidade pontual.</p>
+
+    <nav class="pager" aria-label="Navegação entre tópicos">
+      <a href="01-variaveis-aleatorias.html">← Variáveis aleatórias</a>
+      <a href="03-poisson.html">Distribuição de Poisson →</a>
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Blog Estatístico · Matheus Kevin dos Santos</p>
+  </footer>
+
+</body>
+</html>

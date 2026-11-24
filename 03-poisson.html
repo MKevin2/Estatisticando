@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <title>Distribuição de Poisson · Blog Estatístico</title>
+  <meta name="description" content="Modelo de Poisson por taxa média, probabilidades exatas e acumuladas, média e dispersão, e ajuste proporcional de λ.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">Blog <span>Estatístico</span></a>
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="01-variaveis-aleatorias.html">1 · Variáveis</a>
+      <a href="02-binomial.html">2 · Binomial</a>
+      <a href="03-poisson.html" aria-current="page">3 · Poisson</a>
+      <a href="04-aproximacao-poisson.html">4 · Aproximação</a>
+      <a href="05-normal.html">5 · Normal</a>
+      <a href="mapa-mental.html">Mapa mental</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <span class="kicker">Tópico 3</span>
+    <h1>Distribuição de Poisson</h1>
+    <p class="lead">O modelo de Poisson conta ocorrências em um intervalo contínuo, como tempo, distância ou área, quando se conhece a taxa média de ocorrências.</p>
+
+    <h2>Identificação do modelo</h2>
+    <p>Usa-se a distribuição de Poisson quando:</p>
+    <ol class="regras">
+      <li>A variável conta eventos em um intervalo contínuo (tempo, distância, área, volume e afins).</li>
+      <li>Existe uma taxa média constante de ocorrências, indicada por λ (lê-se “lambda”), que vale para o intervalo considerado.</li>
+      <li>As ocorrências acontecem de forma independente umas das outras.</li>
+    </ol>
+    <p>Indica-se <i>X</i> ∼ Po(λ), em que <i>X</i> é o número de ocorrências. Os valores possíveis são <i>k</i> = 0, 1, 2, …, sem limite superior.</p>
+
+    <h2>Probabilidade exata</h2>
+    <p>A função de probabilidade usa o número de Euler <i>e</i>, aproximadamente 2,71828, e o fatorial de <i>k</i>, escrito como <i>k</i>!. Por definição, 0! = 1.</p>
+
+    <div class="formula">
+      <span class="rotulo">Função de probabilidade de Poisson</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> = <i>k</i>) =
+        <span class="fr"><span><i>e</i><sup>−λ</sup> · λ<sup><i>k</i></sup></span><span><i>k</i>!</span></span>
+        &nbsp;&nbsp; <i>k</i> = 0, 1, 2, …
+      </p>
+    </div>
+
+    <h2>Probabilidades acumuladas</h2>
+    <p>Para “no máximo <i>k</i> ocorrências” ou “pelo menos <i>k</i> ocorrências”, somam-se as probabilidades exatas, da mesma forma que na binomial. Para o caso de “pelo menos”, a regra do complementar também se aplica:</p>
+
+    <div class="formula">
+      <span class="rotulo">Acumuladas</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> ≤ <i>k</i>) =
+        <span class="sum"><span class="up"><i>k</i></span><span class="big">∑</span><span class="low"><i>j</i> = 0</span></span>
+        <i>P</i>(<i>X</i> = <i>j</i>)
+        &nbsp;&nbsp;&nbsp; <i>P</i>(<i>X</i> ≥ <i>k</i>) = 1 − <i>P</i>(<i>X</i> ≤ <i>k</i> − 1)
+      </p>
+    </div>
+
+    <h2>Média, variância e desvio-padrão</h2>
+    <p>Na distribuição de Poisson, a média e a variância são iguais ao próprio parâmetro λ. Isso facilita a conferência dos cálculos.</p>
+
+    <div class="formula">
+      <span class="rotulo">Medidas de resumo</span>
+      <p class="eq">
+        <i>E</i>(<i>X</i>) = λ &nbsp;&nbsp; VAR(<i>X</i>) = λ &nbsp;&nbsp; DP(<i>X</i>) = <span class="raiz">√<span class="rad">λ</span></span>
+      </p>
+    </div>
+
+    <h2>Ajuste proporcional da taxa</h2>
+    <p>A taxa λ está sempre ligada ao intervalo da pergunta. Se a taxa média é conhecida para um intervalo e a pergunta trata de outro intervalo, ajusta-se λ por regra de três, na proporção entre os dois tamanhos.</p>
+
+    <div class="formula">
+      <span class="rotulo">Ajuste de λ por regra de três</span>
+      <p class="eq">
+        λ<sub>novo</sub> = λ<sub>original</sub> ·
+        <span class="fr"><span><i>t</i><sub>novo</sub></span><span><i>t</i><sub>original</sub></span></span>
+      </p>
+    </div>
+
+    <div class="nota">
+      <strong>Como aplicar.</strong>
+      <p>Identifique o tamanho do intervalo em que a taxa foi dada (<i>t</i><sub>original</sub>) e o tamanho do intervalo da pergunta (<i>t</i><sub>novo</sub>). Multiplique a taxa original pela razão entre eles. Essa regra vale para qualquer grandeza contínua: tempo, distância ou área.</p>
+    </div>
+
+    <nav class="pager" aria-label="Navegação entre tópicos">
+      <a href="02-binomial.html">← Distribuição binomial</a>
+      <a href="04-aproximacao-poisson.html">Aproximação pela Poisson →</a>
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Blog Estatístico · Matheus Kevin dos Santos</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <title>Variáveis aleatórias discretas · Blog Estatístico</title>
+  <meta name="description" content="Espaço amostral, função de probabilidade, esperança, variância, desvio-padrão e propriedades lineares de variáveis aleatórias discretas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">Blog <span>Estatístico</span></a>
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="01-variaveis-aleatorias.html" aria-current="page">1 · Variáveis</a>
+      <a href="02-binomial.html">2 · Binomial</a>
+      <a href="03-poisson.html">3 · Poisson</a>
+      <a href="04-aproximacao-poisson.html">4 · Aproximação</a>
+      <a href="05-normal.html">5 · Normal</a>
+      <a href="mapa-mental.html">Mapa mental</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <span class="kicker">Tópico 1</span>
+    <h1>Variáveis aleatórias discretas</h1>
+    <p class="lead">Uma variável aleatória associa um número a cada resultado de um experimento. Quando os valores possíveis podem ser listados, ela é discreta.</p>
+
+    <h2>Espaço amostral e valores possíveis</h2>
+    <p>O espaço amostral reúne todos os resultados possíveis do experimento. A variável <i>X</i> é uma função que leva cada resultado a um número real. Os valores que <i>X</i> pode assumir formam um conjunto finito ou enumerável, indicado por <i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, …, <i>x</i><sub><i>i</i></sub>.</p>
+    <ul class="lista">
+      <li>Primeiro, listam-se os resultados do experimento.</li>
+      <li>Em seguida, associa-se a cada resultado o valor de <i>X</i>.</li>
+      <li>Por fim, identificam-se os valores distintos que <i>X</i> assume.</li>
+    </ul>
+
+    <h2>Função de probabilidade</h2>
+    <p>A função de probabilidade atribui a cada valor <i>x<sub>i</sub></i> a probabilidade <i>P</i>(<i>X</i> = <i>x<sub>i</sub></i>). Quando os eventos que geram cada valor são independentes, essa probabilidade pode ser obtida pelo produto das probabilidades dos eventos componentes. Duas condições sempre valem: cada probabilidade está entre 0 e 1, e a soma de todas é igual a 1.</p>
+
+    <div class="formula">
+      <span class="rotulo">Condição de normalização</span>
+      <p class="eq">
+        <span class="sum"><span class="big">∑</span><span class="low"><i>i</i></span></span>
+        <i>P</i>(<i>X</i> = <i>x</i><sub><i>i</i></sub>) = 1
+      </p>
+    </div>
+
+    <h2>Probabilidades acumuladas e em intervalos</h2>
+    <p>A probabilidade em um intervalo é a soma das probabilidades dos valores que estão dentro dele. Se o intervalo é <i>a</i> &lt; <i>X</i> ≤ <i>b</i>, somam-se apenas os valores <i>x<sub>i</sub></i> que satisfazem essa desigualdade.</p>
+
+    <div class="formula">
+      <span class="rotulo">Probabilidade em um intervalo</span>
+      <p class="eq">
+        <i>P</i>(<i>a</i> &lt; <i>X</i> ≤ <i>b</i>) =
+        <span class="sum"><span class="big">∑</span><span class="low"><i>a</i> &lt; <i>x</i><sub><i>i</i></sub> ≤ <i>b</i></span></span>
+        <i>P</i>(<i>X</i> = <i>x</i><sub><i>i</i></sub>)
+      </p>
+    </div>
+
+    <p>A probabilidade acumulada, <i>F</i>(<i>x</i>), é a probabilidade de <i>X</i> ser menor ou igual a <i>x</i>. Ela é a soma de todos os valores até <i>x</i>.</p>
+
+    <div class="formula">
+      <span class="rotulo">Função de distribuição acumulada</span>
+      <p class="eq">
+        <i>F</i>(<i>x</i>) = <i>P</i>(<i>X</i> ≤ <i>x</i>) =
+        <span class="sum"><span class="big">∑</span><span class="low"><i>x</i><sub><i>i</i></sub> ≤ <i>x</i></span></span>
+        <i>P</i>(<i>X</i> = <i>x</i><sub><i>i</i></sub>)
+      </p>
+    </div>
+
+    <h2>Esperança matemática</h2>
+    <p>A esperança, ou média, <i>E</i>(<i>X</i>) é a soma dos valores ponderados pelas suas probabilidades. Ela indica o valor central de longo prazo da variável.</p>
+
+    <div class="formula">
+      <span class="rotulo">Esperança</span>
+      <p class="eq">
+        <i>E</i>(<i>X</i>) =
+        <span class="sum"><span class="big">∑</span><span class="low"><i>i</i></span></span>
+        <i>x</i><sub><i>i</i></sub> · <i>P</i>(<i>X</i> = <i>x</i><sub><i>i</i></sub>)
+      </p>
+    </div>
+
+    <h2>Variância e desvio-padrão</h2>
+    <p>A variância mede o quanto os valores se afastam da esperança. Ela é a média dos quadrados dos desvios em relação a <i>E</i>(<i>X</i>).</p>
+
+    <div class="formula">
+      <span class="rotulo">Variância (definição)</span>
+      <p class="eq">
+        VAR(<i>X</i>) =
+        <span class="sum"><span class="big">∑</span><span class="low"><i>i</i></span></span>
+        (<i>x</i><sub><i>i</i></sub> − <i>E</i>(<i>X</i>))<sup>2</sup> · <i>P</i>(<i>X</i> = <i>x</i><sub><i>i</i></sub>)
+      </p>
+    </div>
+
+    <p>Na prática, costuma-se usar a forma abreviada, que dispensa o cálculo de cada desvio:</p>
+
+    <div class="formula">
+      <span class="rotulo">Variância (forma abreviada)</span>
+      <p class="eq">
+        VAR(<i>X</i>) = <i>E</i>(<i>X</i><sup>2</sup>) − [<i>E</i>(<i>X</i>)]<sup>2</sup>
+      </p>
+    </div>
+
+    <p>O desvio-padrão é a raiz quadrada da variância. Ele está na mesma unidade de <i>X</i>, o que facilita a interpretação.</p>
+
+    <div class="formula">
+      <span class="rotulo">Desvio-padrão</span>
+      <p class="eq">
+        DP(<i>X</i>) = <span class="raiz">√<span class="rad">VAR(<i>X</i>)</span></span>
+      </p>
+    </div>
+
+    <h2>Propriedades lineares</h2>
+    <p>Quando uma nova variável é obtida por <i>aX</i> + <i>b</i>, com <i>a</i> e <i>b</i> constantes, a esperança e a variância se comportam de maneiras diferentes.</p>
+
+    <div class="formula">
+      <span class="rotulo">Esperança de aX + b</span>
+      <p class="eq">
+        <i>E</i>(<i>aX</i> + <i>b</i>) = <i>a</i> · <i>E</i>(<i>X</i>) + <i>b</i>
+      </p>
+    </div>
+
+    <div class="formula">
+      <span class="rotulo">Variância de aX + b</span>
+      <p class="eq">
+        VAR(<i>aX</i> + <i>b</i>) = <i>a</i><sup>2</sup> · VAR(<i>X</i>)
+      </p>
+    </div>
+
+    <div class="nota">
+      <strong>Por que a constante <i>b</i> sai da variância?</strong>
+      <p>A variância mede a dispersão, isto é, o afastamento dos valores em relação à média. Somar ou subtrair uma constante desloca todos os valores na mesma quantidade, e a média também se desloca dessa mesma quantidade. Assim, os desvios permanecem iguais. Na subtração, o <i>b</i> é eliminado:</p>
+      <p class="eq">
+        (<i>aX</i> + <i>b</i>) − <i>E</i>(<i>aX</i> + <i>b</i>) = <i>a</i> · (<i>X</i> − <i>E</i>(<i>X</i>))
+      </p>
+      <p>Ao elevar ao quadrado, o fator <i>a</i> passa a aparecer como <i>a</i><sup>2</sup>, o que explica a expressão da variância. No desvio-padrão, o resultado é |<i>a</i>| · DP(<i>X</i>).</p>
+    </div>
+
+    <nav class="pager" aria-label="Navegação entre tópicos">
+      <a href="index.html">← Início</a>
+      <a href="02-binomial.html">Distribuição binomial →</a>
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Blog Estatístico · Matheus Kevin dos Santos</p>
+  </footer>
+
+</body>
+</html>

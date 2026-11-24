@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <title>Aproximação da binomial pela Poisson · Blog Estatístico</title>
+  <meta name="description" content="Critérios para aproximar a binomial pela Poisson e a conversão de λ = n · p.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">Blog <span>Estatístico</span></a>
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="01-variaveis-aleatorias.html">1 · Variáveis</a>
+      <a href="02-binomial.html">2 · Binomial</a>
+      <a href="03-poisson.html">3 · Poisson</a>
+      <a href="04-aproximacao-poisson.html" aria-current="page">4 · Aproximação</a>
+      <a href="05-normal.html">5 · Normal</a>
+      <a href="mapa-mental.html">Mapa mental</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <span class="kicker">Tópico 4</span>
+    <h1>Aproximação da binomial pela Poisson</h1>
+    <p class="lead">Quando o número de tentativas é grande e a probabilidade de sucesso é muito pequena, a binomial pode ser substituída pela Poisson, o que simplifica os cálculos.</p>
+
+    <h2>Critério de aplicação</h2>
+    <p>A aproximação é adequada quando <i>n</i> é grande e <i>p</i> é muito pequeno. Não existe um valor único que defina “grande” e “muito pequeno”. Duas regras práticas aparecem com frequência nos livros-texto:</p>
+    <ul class="lista">
+      <li><i>n</i> ≥ 20 e <i>p</i> ≤ 0,05.</li>
+      <li><i>n</i> ≥ 100 e <i>np</i> &lt; 10, em referências mais exigentes.</li>
+    </ul>
+    <p>Quando o enunciado não define o critério, use a regra adotada pelo seu professor ou pela sua bibliografia.</p>
+
+    <h2>Conversão da média</h2>
+    <p>A ideia central é manter a média. Na binomial, a média é <i>np</i>. Por isso, o parâmetro da Poisson é escolhido como:</p>
+
+    <div class="formula">
+      <span class="rotulo">Parâmetro da Poisson</span>
+      <p class="eq">λ = <i>n</i> · <i>p</i></p>
+    </div>
+
+    <p>Com esse valor, a probabilidade de <i>k</i> sucessos é calculada pela fórmula de Poisson.</p>
+
+    <div class="formula">
+      <span class="rotulo">Aproximação</span>
+      <p class="eq">
+        <i>P</i>(<i>X</i> = <i>k</i>) ≈
+        <span class="fr"><span><i>e</i><sup>−<i>np</i></sup> · (<i>np</i>)<sup><i>k</i></sup></span><span><i>k</i>!</span></span>
+      </p>
+    </div>
+
+    <div class="nota">
+      <strong>Como identificar o caso.</strong>
+      <p>Na binomial, o número de tentativas é fixo e a probabilidade de sucesso é constante. Se os critérios acima forem atendidos, use a Poisson com λ = <i>n</i> · <i>p</i>. Se a pergunta exigir a fórmula exata da binomial, não aplique a aproximação.</p>
+    </div>
+
+    <h2>Por que a aproximação funciona</h2>
+    <p>Quando <i>n</i> cresce e <i>p</i> diminui de modo que o produto <i>np</i> fique próximo de um valor fixo, as probabilidades da binomial tendem às da Poisson com esse mesmo produto. A média é preservada, e a variância da binomial, <i>np</i>(1 − <i>p</i>), fica próxima de <i>np</i>, pois 1 − <i>p</i> está próximo de 1.</p>
+
+    <nav class="pager" aria-label="Navegação entre tópicos">
+      <a href="03-poisson.html">← Distribuição de Poisson</a>
+      <a href="05-normal.html">Distribuição normal →</a>
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Blog Estatístico · Matheus Kevin dos Santos</p>
+  </footer>
+
+</body>
+</html>

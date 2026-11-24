@@ -1,0 +1,439 @@
+/* ==========================================================================
+   Blog Estatístico · Matheus Kevin dos Santos
+   Paleta em tons de azul claro · estilo minimalista
+   Fórmulas em HTML e CSS puros (sem MathML, sem JavaScript)
+   ========================================================================== */
+
+:root {
+  --azul-50: #f5faff;
+  --azul-100: #eef6fd;
+  --azul-200: #d6eaf9;
+  --azul-300: #a9d3f3;
+  --azul-500: #4a9ed9;
+  --azul-700: #1f5f93;
+  --azul-900: #12324f;
+  --texto: #1c2b39;
+  --muted: #5d6f80;
+  --branco: #ffffff;
+  --sombra: 0 10px 24px -16px rgba(31, 95, 147, .45);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--texto);
+  background-color: var(--azul-100);
+  background-image: radial-gradient(circle at 1px 1px, #cfe5f8 1px, transparent 0);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+a { color: var(--azul-700); }
+
+/* ---------- Cabeçalho e menu ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem 1rem;
+  padding: .8rem 1.25rem;
+  background: rgba(238, 246, 253, .94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--azul-200);
+}
+
+.brand {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--azul-900);
+  text-decoration: none;
+}
+.brand span { color: var(--azul-500); font-style: italic; }
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+.menu a {
+  font-size: .84rem;
+  color: var(--azul-700);
+  text-decoration: none;
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background .2s, color .2s;
+}
+.menu a:hover { background: var(--azul-200); }
+.menu a[aria-current="page"] {
+  background: var(--azul-700);
+  color: var(--branco);
+}
+
+/* ---------- Estrutura de conteúdo ---------- */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+.kicker {
+  display: inline-block;
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--azul-700);
+  background: var(--azul-200);
+  padding: .25rem .75rem;
+  border-radius: 999px;
+}
+
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  color: var(--azul-900);
+  margin: .9rem 0 .5rem;
+}
+
+h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  color: var(--azul-900);
+  margin: 2.8rem 0 .7rem;
+}
+h2::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--azul-500);
+  margin-bottom: .65rem;
+}
+
+h3 {
+  font-size: 1.08rem;
+  color: var(--azul-700);
+  margin: 1.6rem 0 .4rem;
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+p { margin: .7rem 0; }
+
+ul.lista { padding-left: 1.2rem; }
+ul.lista li { margin: .4rem 0; }
+
+/* ---------- Fórmulas (HTML e CSS) ---------- */
+.formula {
+  background: var(--branco);
+  border: 1px solid var(--azul-200);
+  border-left: 5px solid var(--azul-500);
+  border-radius: 12px;
+  padding: .9rem 1rem;
+  margin: 1.2rem 0;
+  box-shadow: var(--sombra);
+  overflow-x: auto;
+}
+
+.formula .rotulo {
+  display: block;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--azul-500);
+  margin-bottom: .2rem;
+}
+
+p.eq {
+  font-family: "Cambria", "Georgia", "Times New Roman", serif;
+  font-size: 1.12rem;
+  line-height: 2.2;
+  text-align: center;
+  margin: .3rem 0;
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+p.eq sup,
+p.eq sub {
+  font-size: .68em;
+  line-height: 0;
+}
+
+/* Fração empilhada */
+.fr {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1.25;
+  margin: 0 .15em;
+}
+.fr > span {
+  display: block;
+  padding: 0 .3em;
+}
+.fr > span + span {
+  border-top: 1px solid currentColor;
+}
+.fr.sem > span + span {
+  border-top: 0;
+}
+
+/* Somatório com limites */
+.sum {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1;
+  margin: 0 .2em;
+}
+.sum .big { font-size: 1.5em; }
+.sum .up,
+.sum .low {
+  font-size: .68em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Raiz quadrada com barra superior */
+.raiz { white-space: nowrap; }
+.raiz .rad {
+  border-top: 1px solid currentColor;
+  padding: 0 .15em;
+}
+
+/* Parênteses grandes ao redor de uma fração */
+.par { font-size: 1.25em; line-height: 1; vertical-align: middle; }
+
+/* ---------- Blocos de apoio ---------- */
+.nota {
+  background: var(--azul-200);
+  border-radius: 12px;
+  padding: .9rem 1.1rem;
+  margin: 1.2rem 0;
+  color: var(--azul-900);
+}
+.nota strong { color: var(--azul-900); }
+
+.regras {
+  list-style: none;
+  padding: 0;
+  counter-reset: regra;
+}
+.regras li {
+  counter-increment: regra;
+  position: relative;
+  padding: .65rem .85rem .65rem 3rem;
+  margin: .5rem 0;
+  background: var(--branco);
+  border: 1px solid var(--azul-200);
+  border-radius: 10px;
+}
+.regras li::before {
+  content: counter(regra);
+  position: absolute;
+  left: .8rem;
+  top: .75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--azul-500);
+  color: var(--branco);
+  font-size: .8rem;
+  display: grid;
+  place-items: center;
+}
+
+/* ---------- Página inicial e cartões ---------- */
+.hero .faixa {
+  width: 120px;
+  height: 10px;
+  margin-top: 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--azul-300), var(--azul-500), var(--azul-300));
+  opacity: .75;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.card {
+  display: block;
+  background: var(--branco);
+  border: 1px solid var(--azul-200);
+  border-radius: 16px;
+  padding: 1.2rem 1.25rem;
+  text-decoration: none;
+  color: var(--texto);
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px -18px rgba(31, 95, 147, .55);
+}
+.card .num {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--azul-300);
+}
+.card h3 { margin: .45rem 0 .3rem; color: var(--azul-900); }
+.card p { margin: 0; font-size: .92rem; color: var(--muted); }
+
+/* ---------- Navegação entre tópicos ---------- */
+.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--azul-300);
+}
+.pager a {
+  font-weight: 500;
+  text-decoration: none;
+  max-width: 48%;
+}
+.pager a:hover { text-decoration: underline; }
+
+/* ---------- Tabela Z ---------- */
+.tabela-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  margin: 1rem 0 1.5rem;
+}
+table.tabela-z {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .86rem;
+  background: var(--branco);
+}
+table.tabela-z caption {
+  caption-side: top;
+  text-align: left;
+  padding: .6rem .2rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.tabela-z th,
+.tabela-z td {
+  padding: .42rem .5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--azul-100);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tabela-z thead th {
+  background: var(--azul-700);
+  color: var(--branco);
+  font-weight: 500;
+}
+.tabela-z tbody th {
+  background: var(--azul-200);
+  color: var(--azul-900);
+  font-weight: 600;
+}
+.tabela-z tbody tr:nth-child(even) td { background: var(--azul-50); }
+.tabela-z tbody td:hover { background: var(--azul-200); }
+
+/* ---------- Mapa mental ---------- */
+.mapa-figura {
+  background: var(--branco);
+  border: 1px dashed var(--azul-300);
+  border-radius: 18px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.mapa-figura img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.mapa-figura figcaption {
+  color: var(--muted);
+  font-size: .9rem;
+  margin-top: .6rem;
+}
+
+/* ---------- Sobre ---------- */
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: var(--branco);
+  border: 1px solid var(--azul-200);
+  border-radius: 18px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: var(--sombra);
+  margin: 1.5rem 0;
+}
+.avatar {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--azul-300), var(--azul-500));
+  color: var(--branco);
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.6rem;
+  display: grid;
+  place-items: center;
+}
+.perfil h2 { margin: 0; font-size: 1.3rem; }
+.perfil h2::before { display: none; }
+.perfil p { margin: .2rem 0 0; color: var(--muted); font-size: .95rem; }
+
+/* ---------- Rodapé ---------- */
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: .85rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--azul-200);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .site-header { padding: .7rem 1rem; }
+  .brand { width: 100%; }
+  .menu { gap: .3rem; }
+  .menu a { font-size: .8rem; padding: .3rem .6rem; }
+  .pager { flex-direction: column; align-items: flex-start; }
+  .pager a { max-width: 100%; }
+  .perfil { flex-direction: column; text-align: center; }
+  p.eq { font-size: 1rem; white-space: normal; }
+}
