@@ -62,5 +62,5 @@ jobs:
 
       - name: Validar arquivos CSS com stylelint
         run: |
-         npm install --no-save stylelint stylelint-config-standard
-         npx stylelint "**/*.css" --allow-empty-input
+          npm install --no-save stylelint stylelint-config-standard
+          npx stylelint "**/*.css" --config .stylelintrc.json --allow-empty-input
