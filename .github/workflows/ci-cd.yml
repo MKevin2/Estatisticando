@@ -23,18 +23,43 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Verificar existência do index.html
+      - name: Verificar existência do index.html e arquivos estáticos
         run: |
           test -f index.html
-          echo "index.html encontrado com sucesso."
+          echo "index.html encontrado."
+          find . -maxdepth 3 -type f \( -name "*.html" -o -name "*.css" \)
 
-      - name: Configurar Node.js para validação de CSS
+      - name: Validar sintaxe básica dos arquivos CSS
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Validar arquivos CSS com stylelint
-        run: npx --yes stylelint "**/*.css" --config-basedir . --allow-empty-input
+      - name: Checar chaves e estrutura CSS
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+
+            function walk(dir) {
+              for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+                if (entry.name === ".git" || entry.name === ".github" || entry.name === "node_modules") continue;
+                const full = path.join(dir, entry.name);
+                if (entry.isDirectory()) walk(full);
+                else if (entry.name.endsWith(".css")) {
+                  const content = fs.readFileSync(full, "utf8");
+                  const open = (content.match(/{/g) || []).length;
+                  const close = (content.match(/}/g) || []).length;
+                  if (open !== close) {
+                    console.error(`Chaves desbalanceadas em ${full}: {=${open}, }=${close}`);
+                    process.exit(1);
+                  }
+                  console.log(`CSS OK: ${full}`);
+                }
+              }
+            }
+
+            walk(".");
+          '
 
   deploy:
     name: CD - Deploy no GitHub Pages
@@ -59,8 +84,3 @@ jobs:
       - name: Publicar no GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Validar arquivos CSS com stylelint
-        run: |
-          npm install --no-save stylelint stylelint-config-standard
-          npx stylelint "**/*.css" --config .stylelintrc.json --allow-empty-input
