@@ -59,3 +59,8 @@ jobs:
       - name: Publicar no GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Validar arquivos CSS com stylelint
+        run: |
+         npm install --no-save stylelint stylelint-config-standard
+         npx stylelint "**/*.css" --allow-empty-input
