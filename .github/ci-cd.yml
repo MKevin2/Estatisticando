@@ -1,0 +1,61 @@
+name: CI/CD HTML + CSS para GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI - Validação e Verificação
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Verificar existência do index.html
+        run: |
+          test -f index.html
+          echo "index.html encontrado com sucesso."
+
+      - name: Configurar Node.js para validação de CSS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validar arquivos CSS com stylelint
+        run: npx --yes stylelint "**/*.css" --config-basedir . --allow-empty-input
+
+  deploy:
+    name: CD - Deploy no GitHub Pages
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enviar artefato do site estático
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
